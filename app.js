@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
+require("dotenv").config();
 
 app.get("/", (req, res) => res.send("Hello, world!"));
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, (error) => {
   // This is important!
   // Without this, any startup errors will silently fail
