@@ -1,4 +1,3 @@
-<!-- index.ejs -->
 <html>
   <head>
     <title>Homepage</title>
@@ -11,8 +10,10 @@
       <li>
         <%= message.user %> <br />
         <%= message.text %> <br />
-        <%= message.added %>
+        <%= message.added %><br />
       </li>
+      <a href="/messages/<%= message.id %>">Open</a>
+      <br />
       <br />
       <% }) %>
     </ul>
