@@ -1,19 +1,25 @@
 const express = require("express");
 const app = express();
-const path = require("node:path");
+const indexRouter = require("./routes/indexRouter");
 
+const path = require("node:path");
+const assetsPath = path.join(__dirname, "public");
 require("dotenv").config();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => res.render("index", { message: "EJS test msg" }));
+app.use(express.static(assetsPath));
 
-const PORT = process.env.PORT;
+app.use("/", indexRouter);
+
+app.get("/new", (req, res) => {
+  res.render("newMessage", { message: "EJS test msg" });
+});
+
+const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, (error) => {
-  // This is important!
-  // Without this, any startup errors will silently fail
-  // instead of giving you a helpful error message.
   if (error) {
     throw error;
   }

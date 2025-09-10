@@ -1,5 +1,19 @@
+<!-- index.ejs -->
 <html>
+  <head>
+    <title>Homepage</title>
+  </head>
   <body>
-    <%= message %>
+    <h2><%- title %></h2>
+    <ul>
+      <% messages.forEach(function(message) { %>
+      <li>
+        <%= message.user %> <br />
+        <%= message.text %> <br />
+        <%= message.added %>
+      </li>
+      <br />
+      <% }) %>
+    </ul>
   </body>
 </html>
