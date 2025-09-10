@@ -1,8 +1,13 @@
 const express = require("express");
 const app = express();
+const path = require("node:path");
+
 require("dotenv").config();
 
-app.get("/", (req, res) => res.send("Hello, world!"));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => res.render("index", { message: "EJS test msg" }));
 
 const PORT = process.env.PORT;
 app.listen(PORT, (error) => {
