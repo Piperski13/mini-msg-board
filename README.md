@@ -13,6 +13,13 @@ Users can:
 - **EJS** templates for rendering views
 - **MVC-based structure** (separating routes, controllers, and views)
 - Supports `GET` for fetching pages and `POST` for adding new messages
+https://mini-msg-board-6p7g.onrender.com/
+---
+
+## 📦 Deployment
+👉 [Mini-Msg-Board - Live](https://mini-msg-board-6p7g.onrender.com/)
+
+This project is deployed on Render.
 
 ---
 
