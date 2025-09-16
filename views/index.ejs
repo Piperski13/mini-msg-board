@@ -5,6 +5,9 @@
   <body>
     <h2><%- title %></h2>
     <a href="/new">Add new message</a>
+    <form action="/delete" method="POST">
+      <button type="submit">Delete All Messages</button>
+    </form>
     <ul>
       <% messages.forEach(function(message) { %>
       <li>
@@ -13,6 +16,9 @@
         <%= message.added %><br />
       </li>
       <a href="/messages/<%= message.id %>">Open</a>
+      <form action="/delete/<%= message.id %>" method="POST">
+        <button type="submit">Delete</button>
+      </form>
       <br />
       <br />
       <% }) %>

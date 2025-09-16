@@ -1,40 +1,68 @@
 const db = require("../db/queries");
-// const messages = [
-//   {
-//     id: 1,
-//     text: "Hi there!",
-//     user: "Amando",      // RENAMED TO username IN LOCAL DB
-//     added: new Date(),
-//   },
-//   {
-//     id: 2,
-//     text: "Hello World!",
-//     user: "Charles",     // RENAMED TO username IN LOCAL DB
-//     added: new Date(),
-//   },
-// ];
 
 async function getMessages(req, res) {
-  const messages = await db.getAllMessages();
-  res.render("index", { title: "Mini Message Board", messages });
+  try {
+    const messages = await db.getAllMessages();
+    res.render("index", { title: "Mini Message Board", messages });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
 }
 
 async function openMessages(req, res) {
-  const id = Number(req.params.id);
-  const message = await db.openMessage(id);
+  try {
+    const id = Number(req.params.id);
+    const message = await db.openMessage(id);
 
-  res.render("message", { title: "Message", message });
+    res.render("message", { title: "Message", message });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+}
+
+async function newMessages(req, res) {
+  try {
+    const { msg, name } = req.body;
+    await db.insertMessage(msg, name);
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+}
+
+async function deleteAllMessages(req, res) {
+  try {
+    await db.deleteAllMessages();
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+}
+
+async function deleteMessage(req, res) {
+  try {
+    const id = Number(req.params.id);
+    await db.deleteMessage(id);
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
 }
 
 async function formPage(req, res) {
   res.render("form");
 }
-async function newMessages(req, res) {
-  const { msg, name } = req.body;
-  const counter = messages.length + 1;
 
-  messages.push({ id: counter, text: msg, user: name, added: new Date() });
-  res.redirect("/");
-}
-
-module.exports = { getMessages, openMessages, formPage, newMessages };
+module.exports = {
+  getMessages,
+  openMessages,
+  formPage,
+  newMessages,
+  deleteAllMessages,
+  deleteMessage,
+};

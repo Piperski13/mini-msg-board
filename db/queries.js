@@ -5,8 +5,11 @@ async function getAllMessages() {
   return rows;
 }
 
-async function insertUsername(username) {
-  await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
+async function insertMessage(text, username) {
+  await pool.query("INSERT INTO messages (text,username) VALUES ($1, $2)", [
+    text,
+    username,
+  ]);
 }
 
 async function openMessage(id) {
@@ -16,12 +19,17 @@ async function openMessage(id) {
   return rows;
 }
 
-async function deleteAllUsers() {
-  await pool.query("DELETE FROM usernames");
+async function deleteAllMessages() {
+  await pool.query("DELETE FROM messages");
+}
+
+async function deleteMessage(id) {
+  await pool.query("DELETE FROM messages WHERE id = ($1)", [id]);
 }
 module.exports = {
   getAllMessages,
-  insertUsername,
+  insertMessage,
   openMessage,
-  deleteAllUsers,
+  deleteAllMessages,
+  deleteMessage,
 };
