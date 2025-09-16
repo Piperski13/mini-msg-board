@@ -21,9 +21,9 @@ async function getMessages(req, res) {
 
 async function openMessages(req, res) {
   const id = Number(req.params.id);
-  const msg = messages.find((message) => message.id === id);
+  const message = await db.openMessage(id);
 
-  res.render("message", { title: "Message", msg });
+  res.render("message", { title: "Message", message });
 }
 
 async function formPage(req, res) {

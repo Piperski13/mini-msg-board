@@ -9,11 +9,10 @@ async function insertUsername(username) {
   await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
 }
 
-async function searchUsernames(query) {
-  const { rows } = await pool.query(
-    "SELECT * FROM usernames WHERE username ILIKE ($1)",
-    [`%${query}%`]
-  );
+async function openMessage(id) {
+  const { rows } = await pool.query("SELECT * FROM messages WHERE id = ($1)", [
+    id,
+  ]);
   return rows;
 }
 
@@ -23,6 +22,6 @@ async function deleteAllUsers() {
 module.exports = {
   getAllMessages,
   insertUsername,
-  searchUsernames,
+  openMessage,
   deleteAllUsers,
 };
