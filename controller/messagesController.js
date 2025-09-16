@@ -1,19 +1,21 @@
-const messages = [
-  {
-    id: 1,
-    text: "Hi there!",
-    user: "Amando",
-    added: new Date(),
-  },
-  {
-    id: 2,
-    text: "Hello World!",
-    user: "Charles",
-    added: new Date(),
-  },
-];
+const db = require("../db/queries");
+// const messages = [
+//   {
+//     id: 1,
+//     text: "Hi there!",
+//     user: "Amando",      // RENAMED TO username IN LOCAL DB
+//     added: new Date(),
+//   },
+//   {
+//     id: 2,
+//     text: "Hello World!",
+//     user: "Charles",     // RENAMED TO username IN LOCAL DB
+//     added: new Date(),
+//   },
+// ];
 
 async function getMessages(req, res) {
+  const messages = await db.getAllMessages();
   res.render("index", { title: "Mini Message Board", messages });
 }
 
