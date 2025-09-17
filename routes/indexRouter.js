@@ -4,6 +4,7 @@ const {
   getMessages,
   openMessages,
   formPage,
+  validateUser,
   newMessages,
   deleteAllMessages,
   deleteMessage,
@@ -12,7 +13,7 @@ const {
 indexRouter.get("/", getMessages);
 indexRouter.get("/messages/:id", openMessages);
 indexRouter.get("/new", formPage);
-indexRouter.post("/new", newMessages);
+indexRouter.post("/new", validateUser, newMessages);
 indexRouter.post("/delete", deleteAllMessages);
 indexRouter.post("/delete/:id", deleteMessage);
 
